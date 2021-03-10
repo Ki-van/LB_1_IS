@@ -54,13 +54,24 @@ namespace LB_1_IS
             StreamWriter output = new StreamWriter("encoded.txt", false, Encoding.UTF8);
 
             string sourceLine, outputLine, bigramm;
+        
             while ((sourceLine = input.ReadLine()) != null)
             {
                 outputLine = "";
                 for (int i = 0; i < sourceLine.Length; i += 2)
                 {
                     bigramm = "";
+                    while (i < sourceLine.Length && !alphabet.Contains(sourceLine[i]))
+                        i++;
+
+                    if (i >= sourceLine.Length)
+                        break;
+
                     bigramm += sourceLine[i];
+
+                    while (i + 1 < sourceLine.Length && !alphabet.Contains(sourceLine[i + 1]))
+                        i++;
+
                     if (i + 1 < sourceLine.Length)
                     {
                         if (bigramm[0] == sourceLine[i + 1])
@@ -79,7 +90,7 @@ namespace LB_1_IS
                     int bigrAI = -1, bigrAJ = -1,
                         bigrBI = -1, bigrBJ = -1;
 
-                    for (int j = 0; j < matrixN && (bigrAI == -1 || bigrBI == -1); j++)
+                    for ( int j = 0; j < matrixN && (bigrAI == -1 || bigrBI == -1); j++)
                     {
                         for (int k = 0; k < matrixN; k++)
                         {
@@ -99,52 +110,74 @@ namespace LB_1_IS
                     //Строки
                     if (bigrAI == bigrBI)
                     {
-                        if (bigrAJ < bigrBJ)
+                        if (bigrAJ > bigrBJ)
                         {
-                            int tmp = bigrAJ;
-                            bigrAJ = bigrBJ;
-                            bigrBJ = tmp;
-                        }
-
-                        if (bigrAJ == matrixN - 1)
-                        {
-                            outputLine += matrix[bigrAI, 0];
-                            outputLine += matrix[bigrBI, bigrBJ];
+                            if (bigrAJ == matrixN - 1)
+                            {
+                                outputLine += matrix[bigrAI, 0];
+                                outputLine += matrix[bigrBI, bigrBJ];
+                            }
+                            else
+                            {
+                                outputLine += matrix[bigrBI, bigrBJ];
+                                outputLine += matrix[bigrAI, bigrAJ];
+                            }
                         }
                         else
                         {
-                            outputLine += matrix[bigrBI, bigrBJ];
-                            outputLine += matrix[bigrAI, bigrAJ];
+                            if (bigrBJ == matrixN - 1)
+                            {
+                                outputLine += matrix[bigrAI, 0];
+                                outputLine += matrix[bigrBI, bigrAJ];
+                            }
+                            else
+                            {
+                                outputLine += matrix[bigrBI, bigrAJ];
+                                outputLine += matrix[bigrAI, bigrBJ];
+                            }
                         }
 
                     }
-                    else // столбцы
+                    else // Столбцы
                         if (bigrAJ == bigrBJ)
                     {
-                        if (bigrAI < bigrBI)
+                        if (bigrAI > bigrBI)
                         {
-                            int tmp = bigrAI;
-                            bigrAI = bigrBI;
-                            bigrBI = tmp;
-                        }
-
-                        if (bigrAI == matrixN - 1)
-                        {
-                            outputLine += matrix[0, bigrAJ];
-                            outputLine += matrix[bigrBJ, bigrBJ];
+                            if (bigrAI == matrixN - 1)
+                            {
+                                outputLine += matrix[0, bigrAJ];
+                                outputLine += matrix[bigrBJ, bigrBJ];
+                            }
+                            else
+                            {
+                                outputLine += matrix[bigrBI, bigrBJ];
+                                outputLine += matrix[bigrAI, bigrAJ];
+                            }
                         }
                         else
                         {
-                            outputLine += matrix[bigrBI, bigrBJ];
-                            outputLine += matrix[bigrAI, bigrAJ];
+                            if (bigrBI == matrixN - 1)
+                            {
+                                outputLine += matrix[0, bigrAJ];
+                                outputLine += matrix[bigrBJ, bigrBJ];
+                            }
+                            else
+                            {
+                                outputLine += matrix[bigrAI, bigrBJ];
+                                outputLine += matrix[bigrBI, bigrAJ];
+                            }
                         }
-
                     }
                     else
                     {
                         if(bigrAJ > bigrBJ)
                         {
-
+                            outputLine += matrix[bigrBI, bigrAJ];
+                            outputLine += matrix[bigrAI, bigrBJ];
+                        } else
+                        {
+                            outputLine += matrix[bigrAI, bigrBJ];
+                            outputLine += matrix[bigrBI, bigrAJ];
                         }
                     }
 
@@ -153,6 +186,12 @@ namespace LB_1_IS
             }
             output.Close();
             input.Close();
+
+            return true;
+        }
+
+        public static bool DecodePleifer(string path, string key)
+        {
 
             return true;
         }

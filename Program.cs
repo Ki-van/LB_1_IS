@@ -7,8 +7,7 @@ namespace LB_1_IS
     {
         static void Main(string[] args)
         {
-            Crypto.EncodeMultCipher("in.txt", 2);
-            Crypto.DecodeMultCipher("encoded.txt", 2);
+           
             Crypto.EncodePleifer("in.txt", "аддище");
         }
     }
