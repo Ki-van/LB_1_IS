@@ -11,6 +11,46 @@ namespace LB_1_IS
         private static string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.";
         private static int m = alphabet.Length;
 
+        public static Dictionary<char, double> FrequencyAnalysis(string path)
+        {
+            int totalCount = 0;
+            Dictionary<char, double> SymbolDistribution = new Dictionary<char, double>();
+
+            StreamReader input = new StreamReader(path, System.Text.Encoding.UTF8);
+            string line;
+            while ((line = input.ReadLine()) != null)
+            {
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (SymbolDistribution.ContainsKey(line[i]))
+                    {
+                        SymbolDistribution[line[i]]++;
+                        totalCount++;
+                    }
+                    else
+                    {
+                        if (alphabet.IndexOf(line[i]) > 0)
+                        {
+                            SymbolDistribution.Add(line[i], 1);
+                            totalCount++;
+                        }
+                    }
+                }
+            }
+
+            char[] symbols = new char[SymbolDistribution.Keys.Count]; 
+            
+            SymbolDistribution.Keys.CopyTo(symbols, 0);
+
+            for(int i = 0; i < symbols.Length; i++)
+            {
+                SymbolDistribution[symbols[i]] = SymbolDistribution.GetValueOrDefault(symbols[i]) / totalCount;
+            } 
+            
+
+            return SymbolDistribution;
+        }
+
         public static bool EncodePleifer(string path, string key)
         {
             int matrixN = (int)Math.Sqrt(m);
@@ -63,7 +103,7 @@ namespace LB_1_IS
             StreamWriter output = new StreamWriter("encoded.txt", false, Encoding.UTF8);
 
             string sourceLine, outputLine, bigramm;
-        
+
             while ((sourceLine = input.ReadLine()) != null)
             {
                 outputLine = "";
@@ -99,7 +139,7 @@ namespace LB_1_IS
                     int bigrAI = -1, bigrAJ = -1,
                         bigrBI = -1, bigrBJ = -1;
 
-                    for ( int j = 0; j < matrixN && (bigrAI == -1 || bigrBI == -1); j++)
+                    for (int j = 0; j < matrixN && (bigrAI == -1 || bigrBI == -1); j++)
                     {
                         for (int k = 0; k < matrixN; k++)
                         {
@@ -145,8 +185,8 @@ namespace LB_1_IS
                     }
                     else
                     {
-                            outputLine += matrix[bigrAI, bigrBJ];  
-                            outputLine += matrix[bigrBI, bigrAJ];
+                        outputLine += matrix[bigrAI, bigrBJ];
+                        outputLine += matrix[bigrBI, bigrAJ];
                     }
 
                 }
