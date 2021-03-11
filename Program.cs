@@ -9,6 +9,7 @@ namespace LB_1_IS
         {
            
             Crypto.EncodePleifer("in.txt", "аддище");
+            Crypto.DecodePleifer("encoded.txt", "аддище");
         }
     }
 }

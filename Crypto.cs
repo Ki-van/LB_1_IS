@@ -119,81 +119,34 @@ namespace LB_1_IS
                     //В одной строке
                     if (bigrAI == bigrBI)
                     {
-                        // А за B
-                        if (bigrAJ > bigrBJ)
-                        {
-                            //А в конце
-                            if (bigrAJ == matrixN - 1)
-                            {
-                                outputLine += matrix[bigrAI, 0];
-                                outputLine += matrix[bigrBI, bigrBJ + 1];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrBI, bigrBJ + 1];
-                                outputLine += matrix[bigrAI, bigrAJ + 1];
-                            }
-                        }
-                        else // B за А
-                        {
-                            //В в конце
-                            if (bigrBJ == matrixN - 1)
-                            {
-                                outputLine += matrix[bigrBI, 0];
-                                outputLine += matrix[bigrAI, bigrAJ + 1];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrAI, bigrAJ + 1];
-                                outputLine += matrix[bigrBI, bigrBJ + 1];
-                            }
-                        }
+                        if (bigrAJ == matrixN - 1)
+                            outputLine += matrix[bigrAI, 0];
+                        else
+                            outputLine += matrix[bigrAI, bigrAJ + 1];
+
+                        if (bigrBJ == matrixN - 1)
+                            outputLine += matrix[bigrBI, 0];
+                        else
+                            outputLine += matrix[bigrBI, bigrBJ + 1];
 
                     }
                     else // Столбцы
                         if (bigrAJ == bigrBJ)
                     {
-                        // А ниже В
-                        if (bigrAI > bigrBI)
-                        {
-                            // A в низу
-                            if (bigrAI == matrixN - 1)
-                            {
-                                outputLine += matrix[0, bigrAJ];
-                                outputLine += matrix[bigrBI + 1, bigrBJ];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrBI + 1, bigrBJ];
-                                outputLine += matrix[bigrAI + 1, bigrAJ];
-                            }
-                        }
-                        else // В ниже А 
-                        {
-                            // В в низу
-                            if (bigrBI == matrixN - 1)
-                            {
-                                outputLine += matrix[0, bigrBJ];
-                                outputLine += matrix[bigrAI + 1, bigrAJ];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrAI + 1, bigrAJ];
-                                outputLine += matrix[bigrBI + 1, bigrBJ];
-                            }
-                        }
+                        if (bigrAI == matrixN - 1)
+                            outputLine += matrix[0, bigrAJ];
+                        else
+                            outputLine += matrix[bigrAI + 1, bigrAJ];
+
+                        if (bigrBI == matrixN - 1)
+                            outputLine += matrix[0, bigrBJ];
+                        else
+                            outputLine += matrix[bigrBI + 1, bigrBJ];
                     }
                     else
                     {
-                        if(bigrAJ > bigrBJ)
-                        {
-                            outputLine += matrix[bigrAI, bigrBJ];
+                            outputLine += matrix[bigrAI, bigrBJ];  
                             outputLine += matrix[bigrBI, bigrAJ];
-                        } else
-                        {
-                            outputLine += matrix[bigrBI, bigrAJ];
-                            outputLine += matrix[bigrAI, bigrBJ];
-                        }
                     }
 
                 }
@@ -256,7 +209,7 @@ namespace LB_1_IS
                 {
                     bigramm = "";
                     bigramm += sourceLine[i];
-                    bigramm += sourceLine[i + 1];               
+                    bigramm += sourceLine[i + 1];
 
                     int bigrAI = -1, bigrAJ = -1,
                         bigrBI = -1, bigrBJ = -1;
@@ -281,84 +234,35 @@ namespace LB_1_IS
                     //В одной строке
                     if (bigrAI == bigrBI)
                     {
-                        // А за B
-                        if (bigrAJ > bigrBJ)
-                        {
-                            //В в начале
-                            if (bigrBJ == 0)
-                            {
-                                outputLine += matrix[bigrAI, bigrAJ - 1];
-                                outputLine += matrix[bigrBI, matrixN - 1];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrBI, bigrBJ - 1];
-                                outputLine += matrix[bigrAI, bigrAJ - 1];
-                            }
-                        }
-                        else // B за А
-                        {
-                            //А в начале
-                            if (bigrAJ == 0)
-                            {
-                                outputLine += matrix[bigrBI, bigrBJ - 1];
-                                outputLine += matrix[bigrAI, matrixN - 1];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrAI, bigrAJ - 1];
-                                outputLine += matrix[bigrBI, bigrBJ - 1];
-                            }
-                        }
+                        if (bigrAJ == 0)
+                            outputLine += matrix[bigrAI, matrixN - 1];
+                        else
+                            outputLine += matrix[bigrAI, bigrAJ - 1];
+
+                        if (bigrBJ == 0)
+                            outputLine += matrix[bigrBI, matrixN - 1];
+                        else
+                            outputLine += matrix[bigrBI, bigrBJ - 1];
 
                     }
                     else // Столбцы
                         if (bigrAJ == bigrBJ)
                     {
-                        // А ниже В
-                        if (bigrAI > bigrBI)
-                        {
-                            // В в начале
-                            if (bigrBI == 0)
-                            {
-                                outputLine += matrix[bigrAI - 1, bigrAJ];
-                                outputLine += matrix[matrixN - 1, bigrBJ];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrBI - 1, bigrBJ];
-                                outputLine += matrix[bigrAI - 1, bigrAJ];
-                            }
-                        }
-                        else // В ниже А 
-                        {
-                            // А в начале
-                            if (bigrAI == 0)
-                            {
-                                outputLine += matrix[bigrBI - 1, bigrBJ];
-                                outputLine += matrix[matrixN - 1, bigrAJ];
-                            }
-                            else
-                            {
-                                outputLine += matrix[bigrAI - 1, bigrAJ];
-                                outputLine += matrix[bigrBI - 1, bigrBJ];
-                            }
-                        }
+                        if (bigrAI == 0)
+                            outputLine += matrix[matrixN - 1, bigrAJ];
+                        else
+                            outputLine += matrix[bigrAI - 1, bigrAJ];
+
+                        if (bigrBI == 0)
+                            outputLine += matrix[matrixN - 1, bigrBJ];
+                        else
+                            outputLine += matrix[bigrBI - 1, bigrBJ];
                     }
                     else
                     {
-                        if (bigrAJ > bigrBJ)
-                        {
-                            outputLine += matrix[bigrAI, bigrBJ];
-                            outputLine += matrix[bigrBI, bigrAJ];
-                        }
-                        else
-                        {
-                            outputLine += matrix[bigrBI, bigrAJ];
-                            outputLine += matrix[bigrAI, bigrBJ];
-                        }
+                        outputLine += matrix[bigrAI, bigrBJ];
+                        outputLine += matrix[bigrBI, bigrAJ];
                     }
-
                 }
                 output.WriteLine(outputLine);
             }
