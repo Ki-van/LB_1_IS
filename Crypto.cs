@@ -57,15 +57,21 @@ namespace LB_1_IS
             char[,] matrix = new char[6, 6];
 
             string formatKey = "";
+            List<char> addedSymbols = new List<char>();
+
             for (int i = 0; i < key.Length; i++)
             {
-                if (alphabet.Contains(key[i]))
+                if (!addedSymbols.Contains(key[i]))
                 {
-                    if (i == 0 || key[i] != key[i - 1])
-                        formatKey += key[i];
+                    addedSymbols.Add(key[i]);
+                    if (alphabet.Contains(key[i]))
+                    {
+                        if (i == 0)
+                            formatKey += key[i];
+                    }
+                    else
+                        return false;
                 }
-                else
-                    return false;
             }
             if (formatKey.Length > matrixN * matrixN)
                 return false;
@@ -204,15 +210,21 @@ namespace LB_1_IS
             char[,] matrix = new char[6, 6];
 
             string formatKey = "";
+            List<char> addedSymbols = new List<char>();
+
             for (int i = 0; i < key.Length; i++)
             {
-                if (alphabet.Contains(key[i]))
+                if (!addedSymbols.Contains(key[i]))
                 {
-                    if (i == 0 || key[i] != key[i - 1])
-                        formatKey += key[i];
+                    addedSymbols.Add(key[i]);
+                    if (alphabet.Contains(key[i]))
+                    {
+                        if (i == 0)
+                            formatKey += key[i];
+                    }
+                    else
+                        return false;
                 }
-                else
-                    return false;
             }
             if (formatKey.Length > matrixN * matrixN)
                 return false;
